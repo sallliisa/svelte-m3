@@ -1,22 +1,13 @@
 import {
-  GCMEncryption,
-  createEncryptionStorage,
-  createLocalStorage,
-  persist,
+  persistBrowserSession,
 } from "@macfja/svelte-persistent-store";
 import { writable, get } from "svelte/store";
 import { modules } from "./modules";
-import type { Modules } from "../types";
 
 function createRoutesStore() {
-  const storage = createEncryptionStorage(
-    createLocalStorage(),
-    new GCMEncryption("5368566D597133743677397A24432646")
-  );
-  const { subscribe, set, update } = writable([]);
+  const { subscribe, set, update } = persistBrowserSession(writable([]), 'routes');
 
   function buildRoutes() {
-    modules.buildModules();
     const authorizedRoutes = get<any>(modules)
       .reduce((acc: any, item: any) => {
         return [

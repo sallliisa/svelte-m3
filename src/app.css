@@ -1,3 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+	.overlay {
+		@apply relative after:absolute after:bottom-0 after:left-0 after:right-0 after:top-0 after:hidden after:rounded-[inherit] hover:after:flex;
+	}
+
+	.text-muted {
+		@apply text-c-on-surface/[38%] dark:text-cd-on-surface/[38%];
+	}
+
+	.bg-muted {
+		@apply bg-c-on-surface/[38%] dark:bg-cd-on-surface/[38%];
+	}
+
+	.stroke-muted {
+		@apply border-c-outline/[38%] stroke-c-outline/[38%] outline-c-outline/[38%] dark:border-cd-outline/[38%] dark:stroke-cd-outline/[38%] dark:outline-cd-outline/[38%];
+	}
+}
+
+/* fallback */
+@font-face {
+	font-family: 'Material Symbols Outlined';
+	font-style: normal;
+	font-weight: 100 700;
+	src: url(/static/fonts/material-symbols-variable.min.woff2) format('woff2');
+}
+
+.material-symbols-outlined {
+	font-family: 'Material Symbols Outlined';
+	font-weight: normal;
+	font-style: normal;
+	font-size: 24px;
+	line-height: 1;
+	letter-spacing: normal;
+	text-transform: none;
+	display: inline-block;
+	white-space: nowrap;
+	word-wrap: normal;
+	direction: ltr;
+	-moz-font-feature-settings: 'liga';
+	font-feature-settings: 'liga';
+	-moz-osx-font-smoothing: grayscale;
+}

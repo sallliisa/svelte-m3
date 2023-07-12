@@ -16,6 +16,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte"],
+  "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte", "src/views/*.svelte", "src/views/*/*/*.svelte", "src/lib/app/stores/*.ts", "src/lib/app/types/*.ts", "src/lib/app/utils/*.ts", "src/lib/app/*.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -7,20 +7,10 @@ function createSidebarStore() {
 		active: 0
 	});
 
-	function toggle() {
-		update((state) => {
-			return {
-				...state,
-				expanded: !state.expanded
-			};
-		});
-	}
-
 	return {
 		subscribe,
 		set,
-		update,
-		toggle
+		update
 	};
 }
 

@@ -1,5 +1,6 @@
 <script lang="ts">
-	import type { StringObject } from '$lib/app/types';
+	import type { StringObject } from '@/lib/app/types';
+	import {twMerge} from 'tailwind-merge'
 
 	type ButtonVariants = 'filled' | 'outlined' | 'tonal' | 'icon';
 	type ButtonColors = 'primary' | 'secondary' | 'tertiary' | 'warning' | 'error' | 'info' | 'success';
@@ -96,8 +97,8 @@
 </script>
 
 <button
-	class=" overlay flex items-center justify-center rounded-full disabled:pointer-events-none
-    {colorMap[variant][color]} {paddingMap[String(square)]} {colorMap[variant].base} {compact ? '' : 'h-10'}"
+	class="{twMerge(`overlay flex items-center justify-center rounded-full disabled:pointer-events-none ${paddingMap[String(square)]}`, $$props.class)}
+    {colorMap[variant][color]} {colorMap[variant].base} {compact ? '' : 'h-10'}"
 	{type}
 	{disabled}
 	on:click

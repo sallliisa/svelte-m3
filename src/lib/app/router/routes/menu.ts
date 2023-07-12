@@ -1,4 +1,4 @@
-import type { Modules } from './types/index';
+import type { Modules } from '@/lib/app/types/index';
 
 // Uses name as permission if permission field is not defined
 // permission is only read on route-level

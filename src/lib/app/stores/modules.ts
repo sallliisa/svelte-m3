@@ -1,19 +1,10 @@
-import {
-  GCMEncryption,
-  createEncryptionStorage,
-  createLocalStorage,
-  persist,
-} from "@macfja/svelte-persistent-store";
+import { persistBrowserSession } from "@macfja/svelte-persistent-store"
 import { hasPermission } from "@/lib/app/utils/common";
 import { writable } from "svelte/store";
-import menu from "@/lib/app/menu";
+import menu from "@/lib/app/router/routes/menu";
 
 function createModuleStore() {
-  const storage = createEncryptionStorage(
-    createLocalStorage(),
-    new GCMEncryption("5368566D597133743677397A24432646")
-  );
-  const store = persist(writable(menu), storage, "modules");
+  const {subscribe, set, update} = persistBrowserSession(writable(menu), 'gamer')
 
   function buildModules() {
     const authorizedModules = menu
@@ -32,11 +23,13 @@ function createModuleStore() {
         };
       })
       .filter((item) => item.routes.length);
-    store.set(authorizedModules);
+    set(authorizedModules);
   }
 
   return {
-    ...store,
+    subscribe,
+    set,
+    update,
     buildModules,
   };
 }
