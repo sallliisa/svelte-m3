@@ -3,6 +3,6 @@
   import {router} from '@/lib/app/router'
 
   onMount(() => {
-    router.push('dashboard')
+    router.push({name: 'dashboard'})
   })
 </script>

@@ -3,17 +3,20 @@
 	import { modules } from '@/lib/app/stores/modules';
 	import Icon from '@/lib/components/base/Icon.svelte';
 	import RailItem from './layouts/RailItem.svelte';
-	import {router} from '@/lib/app/router';
+	import {route} from '@/lib/app/router';
 	import RailDrawer from './layouts/RailDrawer.svelte';
 	import {sidebar} from '@/lib/app/stores/sidebar'
+	import {emphasized_decelerate} from '@/lib/app/utils/easing'
+	import { expand } from '@/lib/app/utils/animate';
 
-	function handleModuleClick(module: any) {
-		sidebar.toggle()
+	function handleModuleClick(module: any, index: number) {
+		sidebar.update((state) => {
+			state.expanded = true
+			state.selected = index
+			return state
+		})
 	}
 
-	let currentRoute = null
-
-	$: currentRoute = router.currentRoute()
 </script>
 
 <div class="fixed z-50 flex flex-row lg:relative lg:left-0 lg:z-0">
@@ -24,8 +27,8 @@
 			<Logo class="w-16" />
 		</div>
 		<div class="flex h-full w-full flex-col items-start gap-4 overflow-auto">
-			{#each $modules as module}
-				<RailItem on:click={() => handleModuleClick(module)} active={currentRoute.module === module.name} title={module.title}>
+			{#each $modules as module, index}
+				<RailItem on:click={() => handleModuleClick(module, index)} active={$route.userData.module === module.name} title={module.title}>
 					<Icon>{module.icon}</Icon>
 				</RailItem>
 			{/each}
@@ -35,8 +38,8 @@
 		</RailItem>
 	</div>
 </div>
-<div class="fixed left-24 z-10 flex flex-row">
 {#if $sidebar.expanded}
+<div in:expand={{duration: 350, easing: emphasized_decelerate, property: 'width', target: 288}} out:expand={{duration: 350, easing: emphasized_decelerate, property: 'width', target: 288}} class="fixed left-24 z-10 flex flex-row">
 	<RailDrawer/>
-{/if}
 </div>
+{/if}

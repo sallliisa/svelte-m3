@@ -1,9 +1,10 @@
 import { routes as userRoutes } from '@/lib/app/stores/routes';
-import { get } from 'svelte/store';
+import { get, writable } from 'svelte/store';
 import { wrap } from 'svelte-spa-router/wrap';
 import { push, pop, replace, location} from 'svelte-spa-router'
 import { staticRoutes } from './routes/static';
 
+userRoutes.buildRoutes()
 const appRoutes = [...get(userRoutes), ...staticRoutes.map(item => {return {...item, userData: {...item.userData, static: true}}}) ]
 
 const modules = import.meta.glob('@/views/*/*/*.svelte')
@@ -22,21 +23,27 @@ const authorizedRoutes = appRoutes.reduce((acc: any, route: any) => {
 }, {});
 
 
-const routerPush = (name: string) => {
-  if (appRoutes.length === staticRoutes.length) userRoutes.buildRoutes()
-  console.log('on router push', appRoutes)
-  const route = appRoutes.find((route: any) => route.userData.name === name)
-  if (route) push(route.path)
-  else throw new Error(`On route navigation (push): Route ${name} not found`)
-}
-
-const currentRoute = () => {
-  if (appRoutes.length === staticRoutes.length) userRoutes.buildRoutes()
-  console.log('on router read', appRoutes)
-  const route = appRoutes.find((route: any) => route.path === get(location))
-  if (route) return {path: route.path, ...route.userData}
-  else throw new Error(`On getting current route: Route ${get(location)} not found`)
+const routerPush = (options: string | {name: string}) => {
+  console.log('routerPush', Object.keys(authorizedRoutes).length, authorizedRoutes)
+  if (Object.keys(authorizedRoutes).length === staticRoutes.length) userRoutes.buildRoutes()
+  if (typeof options === 'string') {
+    push(options)
+  } else {
+    const route = appRoutes.find(item => item.userData.name === options.name)
+    if (route) push(route.path)
+    else throw new Error(`On route navigation (push): Route ${options.name} not found`)
+  }
+  
 }
 
 export const routes = {...authorizedRoutes}
-export const router = {push: routerPush, pop, replace, currentRoute}
+export const router = {push: routerPush, pop, replace}
+
+function createRouteStore() {
+  const route = writable(null)
+  location.subscribe((v) => {
+    route.set(authorizedRoutes[v])
+  })
+  return route
+}
+export const route = createRouteStore()

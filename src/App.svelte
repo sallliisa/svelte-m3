@@ -1,9 +1,7 @@
 <script lang="ts">
   import Router from 'svelte-spa-router';
   import Authenticated from './layouts/Authenticated.svelte';
-  import Unauthenticated from './layouts/Unauthenticated.svelte';
-  import {routes, router} from '@/lib/app/router'
-  import {location} from 'svelte-spa-router';
+  import {routes} from '@/lib/app/router'
 </script>
 
 <main>

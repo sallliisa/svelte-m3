@@ -1,10 +1,10 @@
-import { persistBrowserSession } from "@macfja/svelte-persistent-store"
+import { createLocalStorage, persist, persistBrowserSession } from "@macfja/svelte-persistent-store"
 import { hasPermission } from "@/lib/app/utils/common";
 import { writable } from "svelte/store";
 import menu from "@/lib/app/router/routes/menu";
 
 function createModuleStore() {
-  const {subscribe, set, update} = persistBrowserSession(writable(menu), 'gamer')
+  const {subscribe, set, update} = persist(writable(menu), createLocalStorage(), 'modules')
 
   function buildModules() {
     const authorizedModules = menu
@@ -19,7 +19,7 @@ function createModuleStore() {
             .filter((route: any, index: number) => {
               if (route.separator) return (item.routes[index + 1] as any)?.name;
               else return true;
-            }),
+            })
         };
       })
       .filter((item) => item.routes.length);

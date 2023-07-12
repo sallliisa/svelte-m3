@@ -1,13 +1,16 @@
 import {
-  persistBrowserSession,
+  createLocalStorage,
+  persist,
 } from "@macfja/svelte-persistent-store";
 import { writable, get } from "svelte/store";
 import { modules } from "./modules";
 
 function createRoutesStore() {
-  const { subscribe, set, update } = persistBrowserSession(writable([]), 'routes');
+  const { subscribe, set, update } = persist(writable([]), createLocalStorage(), 'routes');
 
   function buildRoutes() {
+    console.log('building routes')
+    modules.buildModules()
     const authorizedRoutes = get<any>(modules)
       .reduce((acc: any, item: any) => {
         return [
