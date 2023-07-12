@@ -16,10 +16,14 @@ function createModuleStore() {
               if (route.separator) return true;
               else return hasPermission(route.permission || route.name);
             })
-            .filter((route: any, index: number) => {
-              if (route.separator) return (item.routes[index + 1] as any)?.name;
-              else return true;
-            })
+        };
+      }).map((item) => {
+        return {
+          ...item,
+          routes: item.routes.filter((route: any, index: number) => {
+            if (route.separator) return (item.routes[index + 1] as any)?.name;
+            else return true;
+          }),
         };
       })
       .filter((item) => item.routes.length);

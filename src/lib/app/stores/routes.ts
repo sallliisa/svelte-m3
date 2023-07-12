@@ -9,8 +9,7 @@ function createRoutesStore() {
   const { subscribe, set, update } = persist(writable([]), createLocalStorage(), 'routes');
 
   function buildRoutes() {
-    console.log('building routes')
-    modules.buildModules()
+    modules.buildModules();
     const authorizedRoutes = get<any>(modules)
       .reduce((acc: any, item: any) => {
         return [

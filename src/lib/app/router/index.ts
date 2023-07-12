@@ -4,7 +4,7 @@ import { wrap } from 'svelte-spa-router/wrap';
 import { push, pop, replace, location} from 'svelte-spa-router'
 import { staticRoutes } from './routes/static';
 
-userRoutes.buildRoutes()
+if (!get(userRoutes).length) userRoutes.buildRoutes();
 const appRoutes = [...get(userRoutes), ...staticRoutes.map(item => {return {...item, userData: {...item.userData, static: true}}}) ]
 
 const modules = import.meta.glob('@/views/*/*/*.svelte')
