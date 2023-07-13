@@ -23,21 +23,16 @@ const authorizedRoutes = appRoutes.reduce((acc: any, route: any) => {
 }, {});
 
 
-const routerPush = (options: string | {name: string}) => {
-  console.log('routerPush', Object.keys(authorizedRoutes).length, authorizedRoutes)
+const routerPush = (options: string | { name: string }) => {
   if (Object.keys(authorizedRoutes).length === staticRoutes.length) userRoutes.buildRoutes()
   if (typeof options === 'string') {
     push(options)
   } else {
-    const route = appRoutes.find(item => item.userData.name === options.name)
+    const route = appRoutes.find((item) => item.userData.name === options.name)
     if (route) push(route.path)
     else throw new Error(`On route navigation (push): Route ${options.name} not found`)
   }
-  
 }
-
-export const routes = {...authorizedRoutes}
-export const router = {push: routerPush, pop, replace}
 
 function createRouteStore() {
   const route = writable(null)
@@ -46,4 +41,7 @@ function createRouteStore() {
   })
   return route
 }
+
+export const routes = { ...authorizedRoutes }
+export const router = { push: routerPush, pop, replace }
 export const route = createRouteStore()

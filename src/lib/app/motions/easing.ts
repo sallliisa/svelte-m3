@@ -1,6 +1,6 @@
 import bezier from "bezier-easing";
 
-const easer = {
+const curve = {
   linear: bezier(0, 0, 1, 1),
   standard: bezier(0.2, 0, 0, 1),
   standard_accelerate: bezier(0.3, 0, 1, 1),
@@ -14,41 +14,41 @@ const easer = {
 };
 
 export function linear(t: number) {
-  return easer.linear(t);
+  return curve.linear(t);
 }
 
 export function standard(t: number) {
-  return easer.standard(t);
+  return curve.standard(t);
 }
 
 export function standard_accelerate(t: number) {
-  return easer.standard_accelerate(t);
+  return curve.standard_accelerate(t);
 }
 
 export function standard_decelerate(t: number) {
-  return easer.standard_decelerate(t);
+  return curve.standard_decelerate(t);
 }
 
 export function emphasized(t: number) {
-  return easer.emphasized(t);
+  return curve.emphasized(t);
 }
 
 export function emphasized_decelerate(t: number) {
-  return easer.emphasized_decelerate(t);
+  return curve.emphasized_decelerate(t);
 }
 
 export function emphasized_accelerate(t: number) {
-  return easer.emphasized_accelerate(t);
+  return curve.emphasized_accelerate(t);
 }
 
 export function legacy(t: number) {
-  return easer.legacy(t);
+  return curve.legacy(t);
 }
 
 export function legacy_decelerate(t: number) {
-  return easer.legacy_decelerate(t);
+  return curve.legacy_decelerate(t);
 }
 
 export function legacy_accelerate(t: number) {
-  return easer.legacy_accelerate(t);
+  return curve.legacy_accelerate(t);
 }

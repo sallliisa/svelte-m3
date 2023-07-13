@@ -6,20 +6,16 @@
 	import {route} from '@/lib/app/router';
 	import RailDrawer from './layouts/RailDrawer.svelte';
 	import {sidebar} from '@/lib/app/stores/sidebar'
-	import {emphasized_decelerate} from '@/lib/app/utils/easing'
-	import { expand } from '@/lib/app/utils/animate';
+	import {emphasized_decelerate} from '@/lib/app/motions/easing'
+	import { expand } from '@/lib/app/motions/animate';
   import { clickOutside } from '@/lib/app/directives/clickOutside';
 
-	function handleModuleClick(module: any, index: number) {
+	function handleModuleClick(index: number | string) {
 		sidebar.update((state) => {
 			state.expanded = true
 			state.selected = index
 			return state
 		})
-	}
-
-	function handleClickOutside(event) {
-		alert('Click outside!');
 	}
 </script>
 
@@ -32,18 +28,18 @@
 		</div>
 		<div id="gamer2" class="flex h-full w-full flex-col items-start gap-4 overflow-auto">
 			{#each $modules as module, index}
-				<RailItem on:click={() => handleModuleClick(module, index)} active={$route.userData.module === module.name} title={module.title}>
+				<RailItem on:click={() => handleModuleClick(index)} active={$route.userData.module === module.name} title={module.title}>
 					<Icon>{module.icon}</Icon>
 				</RailItem>
 			{/each}
 		</div>
-		<RailItem title="Profil" active={true}>
+		<RailItem title="Profil" on:click={() => handleModuleClick('profile')} active={$sidebar.selected === 'profile'}>
 			<Icon size="24" FILL={1}>person</Icon>
 		</RailItem>
 	</div>
 </div>
 {#if $sidebar.expanded}
-<div use:clickOutside={{handler: () => sidebar.toggle(), exclude: '#app-sidebar'}} in:expand={{duration: 350, easing: emphasized_decelerate, property: 'width', target: 288}} out:expand={{duration: 350, easing: emphasized_decelerate, property: 'width', target: 288}} class="fixed left-24 z-10 flex flex-row">
+<div use:clickOutside={{handler: () => sidebar.toggle(), exclude: '#app-sidebar, #app-modal-scrim, #app-modal-content'}} in:expand={{duration: 350, easing: emphasized_decelerate, property: 'width', target: 288}} out:expand={{duration: 350, easing: emphasized_decelerate, property: 'width', target: 288}} class="fixed left-24 z-10 flex flex-row">
 	<RailDrawer/>
 </div>
 {/if}

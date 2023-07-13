@@ -1,11 +1,15 @@
 import { writable } from 'svelte/store';
 
 function createSidebarStore() {
-	const { subscribe, set, update } = writable({
-		expanded: false,
-		selected: 0,
-		active: 0
-	});
+	const { subscribe, set, update } = writable<{
+    expanded: boolean
+    selected: number | string
+    active: number
+  }>({
+    expanded: false,
+    selected: 0,
+    active: 0,
+  })
 
 	function toggle() {
 		update((state) => {
