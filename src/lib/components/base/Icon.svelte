@@ -11,7 +11,7 @@
     font-variation-settings: 'FILL' {FILL}, 'wght' {wght}, 'GRAD' {GRAD}, 'opsz' {opsz};
     font-size: {size}px
   "
-	class="material-symbols-outlined aspect-square"
+	class="material-symbols-outlined aspect-square {$$props.class}"
 >
 	<slot />
 </span>
