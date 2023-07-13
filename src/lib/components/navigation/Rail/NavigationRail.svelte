@@ -23,10 +23,10 @@
 	<div
 		class="sticky top-0 flex h-screen max-h-screen w-24 flex-col items-center justify-between gap-4 overflow-auto bg-c-surface-container py-8 dark:bg-cd-surface-container"
 	>
-		<div id="gamer1" class="p-4">
+		<div class="p-4">
 			<Logo class="w-16" />
 		</div>
-		<div id="gamer2" class="flex h-full w-full flex-col items-start gap-4 overflow-auto">
+		<div class="flex h-full w-full flex-col items-start gap-4 overflow-auto">
 			{#each $modules as module, index}
 				<RailItem on:click={() => handleModuleClick(index)} active={$route.userData.module === module.name} title={module.title}>
 					<Icon>{module.icon}</Icon>
