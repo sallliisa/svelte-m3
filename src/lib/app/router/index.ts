@@ -3,24 +3,37 @@ import { get, writable } from 'svelte/store';
 import { wrap } from 'svelte-spa-router/wrap';
 import { push, pop, replace, location} from 'svelte-spa-router'
 import { staticRoutes } from './routes/static';
+import { motion } from '../motion'
 
-if (!get(userRoutes).length) userRoutes.buildRoutes();
-const appRoutes = [...get(userRoutes), ...staticRoutes.map(item => {return {...item, userData: {...item.userData, static: true}}}) ]
+if (!get(userRoutes).length) userRoutes.buildRoutes()
+const appRoutes = [
+  ...get(userRoutes),
+  ...staticRoutes.map((item) => {
+    return { ...item, userData: { ...item.userData, static: true } }
+  }),
+]
 
 const modules = import.meta.glob('@/views/*/*/*.svelte')
 const authorizedRoutes = appRoutes.reduce((acc: any, route: any) => {
   if (route.userData.static) {
     acc[route.path] = wrap({
-      ...route, path: undefined
+      ...route,
+      path: undefined,
     })
   } else {
     acc[route.path] = wrap({
-      asyncComponent: (() => modules[`/src/views/${route.userData.module}/${route.userData.name}/${route.userData.name}.svelte`]() as any),
-      userData: route.userData
-    }); 
+      asyncComponent: () => modules[`/src/views/${route.userData.module}/${route.userData.name}/${route.userData.name}.svelte`]() as any,
+      userData: route.userData,
+      conditions: [
+        async () => {
+          await new Promise((resolve) => setTimeout(resolve, motion.duration.extra_long4))
+          return true
+        },
+      ],
+    })
   }
-  return acc;
-}, {});
+  return acc
+}, {})
 
 
 const routerPush = (options: string | { name: string }) => {

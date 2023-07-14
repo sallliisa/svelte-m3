@@ -6,9 +6,10 @@
 	import {route} from '@/lib/app/router';
 	import RailDrawer from './layouts/RailDrawer.svelte';
 	import {sidebar} from '@/lib/app/stores/sidebar'
-	import {emphasized_decelerate} from '@/lib/app/motions/easing'
-	import { expand } from '@/lib/app/motions/animate';
+	import { expand } from '@/lib/app/motion/animate';
   import { clickOutside } from '@/lib/app/directives/clickOutside';
+  import { duration } from '@/lib/app/motion/duration'
+  import { motion } from '@/lib/app/motion'
 
 	function handleModuleClick(index: number | string) {
 		sidebar.update((state) => {
@@ -33,13 +34,17 @@
 				</RailItem>
 			{/each}
 		</div>
-		<RailItem title="Profil" on:click={() => handleModuleClick('profile')} active={$sidebar.selected === 'profile'}>
+		<RailItem title="Profil" on:click={() => handleModuleClick('profile')} active={$sidebar.selected === 'profile' && $sidebar.expanded === true}>
 			<Icon size="24" FILL={1}>person</Icon>
 		</RailItem>
 	</div>
 </div>
 {#if $sidebar.expanded}
-<div use:clickOutside={{handler: () => sidebar.toggle(), exclude: '#app-sidebar, #app-modal-scrim, #app-modal-content'}} in:expand={{duration: 350, easing: emphasized_decelerate, property: 'width', target: 288}} out:expand={{duration: 350, easing: emphasized_decelerate, property: 'width', target: 288}} class="fixed left-24 z-10 flex flex-row">
+<div 
+	use:clickOutside={{handler: () => sidebar.toggle(), exclude: '#app-sidebar, #app-modal-scrim, #app-modal-content'}}
+	in:expand={{duration: motion.duration.long2, easing: motion.easing.emphasized_decelerate, property: 'width', target: 288}}
+	out:expand={{duration: duration.short4, easing: motion.easing.emphasized_decelerate, property: 'width', target: 288}}
+	class="fixed left-24 z-10 flex flex-row">
 	<RailDrawer/>
 </div>
 {/if}

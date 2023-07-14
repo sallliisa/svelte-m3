@@ -4,6 +4,7 @@
   import {routes} from '@/lib/app/router'
   import { colorPreference } from './lib/app/stores/colorpreference';
   import {location} from 'svelte-spa-router'
+  import { motion } from './lib/app/motion'
 
   const layoutMap = {
     'DEFAULT': import('./layouts/Authenticated.svelte'),

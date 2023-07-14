@@ -1,10 +1,10 @@
-import { emphasized_decelerate } from './easing'
+import { motion } from './index'
 
 export function expand(
   node: HTMLElement,
   {
-    duration = 350,
-    easing = emphasized_decelerate,
+    duration = motion.duration.short4,
+    easing = motion.easing.emphasized_decelerate,
     property = 'height',
     target = 100,
     delay = 0,
@@ -27,8 +27,8 @@ export function expand(
 export function expandHeightAuto(
   node: HTMLElement,
   {
-    duration = 350,
-    easing = emphasized_decelerate,
+    duration = motion.duration.short4,
+    easing = motion.easing.emphasized_decelerate,
     delay = 0,
   }: {
     duration?: number
@@ -48,8 +48,8 @@ export function expandHeightAuto(
 export function expandHeightAutoFade(
   node: HTMLElement,
   {
-    duration = 350,
-    easing = emphasized_decelerate,
+    duration = motion.duration.short4,
+    easing = motion.easing.emphasized_decelerate,
     delay = 0,
   }: {
     duration?: number
@@ -68,8 +68,8 @@ export function expandHeightAutoFade(
 export function expandWidthAuto(
   node: HTMLElement,
   {
-    duration = 350,
-    easing = emphasized_decelerate,
+    duration = motion.duration.short4,
+    easing = motion.easing.emphasized_decelerate,
     delay = 0,
   }: {
     duration?: number
@@ -89,8 +89,8 @@ export function expandWidthAuto(
 export function expandWidthAutoFade(
   node: HTMLElement,
   {
-    duration = 350,
-    easing = emphasized_decelerate,
+    duration = motion.duration.short4,
+    easing = motion.easing.emphasized_decelerate,
     delay = 0,
   }: {
     duration?: number
@@ -109,8 +109,8 @@ export function expandWidthAutoFade(
 export function fade(
   node: HTMLElement,
   {
-    duration = 350,
-    easing = emphasized_decelerate,
+    duration = motion.duration.short4,
+    easing = motion.easing.emphasized_decelerate,
     delay = 0,
   }: {
     duration?: number
@@ -130,8 +130,8 @@ export function fade(
 export function directionalFadeLeft(
   node: HTMLElement,
   {
-    duration = 350,
-    easing = emphasized_decelerate,
+    duration = motion.duration.short4,
+    easing = motion.easing.emphasized_decelerate,
     delay = 0,
   }: {
     duration?: number
@@ -151,8 +151,8 @@ export function directionalFadeLeft(
 export function directionalFadeRight(
   node: HTMLElement,
   {
-    duration = 350,
-    easing = emphasized_decelerate,
+    duration = motion.duration.short4,
+    easing = motion.easing.emphasized_decelerate,
     delay = 0,
   }: {
     duration?: number
