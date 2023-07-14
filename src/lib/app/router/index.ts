@@ -3,7 +3,7 @@ import { get, writable } from 'svelte/store';
 import { wrap } from 'svelte-spa-router/wrap';
 import { push, pop, replace, location} from 'svelte-spa-router'
 import { staticRoutes } from './routes/static';
-import { motion } from '../motion'
+import { beforeEach } from './config';
 
 if (!get(userRoutes).length) userRoutes.buildRoutes()
 const appRoutes = [
@@ -24,12 +24,7 @@ const authorizedRoutes = appRoutes.reduce((acc: any, route: any) => {
     acc[route.path] = wrap({
       asyncComponent: () => modules[`/src/views/${route.userData.module}/${route.userData.name}/${route.userData.name}.svelte`]() as any,
       userData: route.userData,
-      conditions: [
-        async () => {
-          await new Promise((resolve) => setTimeout(resolve, motion.duration.extra_long4))
-          return true
-        },
-      ],
+      conditions: beforeEach
     })
   }
   return acc
@@ -50,11 +45,16 @@ const routerPush = (options: string | { name: string }) => {
 function createRouteStore() {
   const route = writable(null)
   location.subscribe((v) => {
-    route.set(authorizedRoutes[v])
+    route.update((state) => {
+      return {
+        ...state,
+        ...authorizedRoutes[v],
+      }
+    })
   })
   return route
 }
 
-export const routes = { ...authorizedRoutes }
+export const routes = authorizedRoutes
 export const router = { push: routerPush, pop, replace }
 export const route = createRouteStore()

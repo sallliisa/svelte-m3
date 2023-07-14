@@ -8,11 +8,8 @@
 <div class="flex flex-row">
 	<NavigationRail />
 	<div class="z-0 flex min-h-screen w-screen flex-col items-center gap-8 bg-c-surface p-8 text-c-on-surface dark:bg-cd-surface dark:text-cd-on-surface">
-		<div>{$location}</div>
-		{#key $location}
-			<main in:fade={{duration: motion.duration.short2}} out:fade={{duration: motion.duration.short2}} class="max-w-screen-2xl w-full grid grid-cols-1 gap-8">
-				<slot/>
-			</main>
-		{/key}
+		<main class="max-w-screen-2xl w-full grid grid-cols-1 gap-8">
+			<slot/>
+		</main>
 	</div>
 </div>

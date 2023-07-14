@@ -44,7 +44,8 @@
 	use:clickOutside={{handler: () => sidebar.toggle(), exclude: '#app-sidebar, #app-modal-scrim, #app-modal-content'}}
 	in:expand={{duration: motion.duration.long2, easing: motion.easing.emphasized_decelerate, property: 'width', target: 288}}
 	out:expand={{duration: duration.short4, easing: motion.easing.emphasized_decelerate, property: 'width', target: 288}}
-	class="fixed left-24 z-10 flex flex-row">
+	class="fixed left-24 z-10 flex flex-row"
+>
 	<RailDrawer/>
 </div>
 {/if}

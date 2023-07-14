@@ -1,1 +1,4 @@
-<div>gamer dashboard</div>
+<script>
+</script>
+
+<div>gamer</div>

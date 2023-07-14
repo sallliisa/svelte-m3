@@ -4,4 +4,4 @@
 </script>
 
 <div class="text-4xl font-bold">Toll Sections</div>
-<Card color='error' class="h-[500px]"></Card>
+<Card class="h-[500px] bg-c-primary dark:bg-cd-primary"></Card>

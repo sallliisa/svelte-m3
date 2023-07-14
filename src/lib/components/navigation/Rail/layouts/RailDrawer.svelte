@@ -2,7 +2,8 @@
   import { modules } from '@/lib/app/stores/modules';
   import Button from '@/lib/components/base/Button.svelte';
   import Icon from '@/lib/components/base/Icon.svelte';
-  import {route, router} from '@/lib/app/router';
+  import {router} from '@/lib/app/router';
+  import {route} from '@/lib/app/router'
   import { sidebar } from '@/lib/app/stores/sidebar';
   import {get} from 'svelte/store';
   import { directionalFadeLeft, directionalFadeRight } from '@/lib/app/motion/animate'
