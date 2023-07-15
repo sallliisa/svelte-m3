@@ -14,9 +14,6 @@
   }
 
   $: currentLocation = $location.split('/')[1]
-
-  let router1
-  let router2
 </script>
 
 <main id="main" class="{$colorPreference}">

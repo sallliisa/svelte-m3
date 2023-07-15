@@ -34,7 +34,7 @@
 	};
 </script>
 
-<div
+<div on:click
 	class="{interactive
 		? 'overlay cursor-pointer after:bg-c-on-surface/[8%] after:active:bg-c-on-surface/[12%] dark:after:bg-cd-on-surface/[8%] dark:after:active:bg-cd-on-surface/[12%]'
 		: ''} {twMerge('flex flex-col gap-4 rounded-xl px-4 py-4', $$props.class)} {colorMap[color]}"
