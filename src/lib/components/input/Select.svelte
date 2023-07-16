@@ -35,8 +35,7 @@
       if (modelValue.includes(item[pick])) selected = (selected as any[]).filter((selectedItem: any) => selectedItem[pick] !== item[pick])
       else selected = [...(selected as any[]), item]
     }
-    updateModelValue()
-    console.log(item, modelValue)
+    updateModelValue() 
   }
 
   $: filteredItems = items.filter((item: any) => item[view].toLowerCase().includes(query.toLowerCase()))
@@ -69,7 +68,7 @@
             </Card>
           {/each}
         {:else}
-          <p class="text-muted">Tidak ada data</p>
+          <p class="text-muted text-xs">Tidak ada data</p>
         {/if}
       </Card>
     </Popover>

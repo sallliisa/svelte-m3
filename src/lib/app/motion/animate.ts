@@ -51,17 +51,19 @@ export function expandHeightAutoFade(
     duration = motion.duration.short4,
     easing = motion.easing.emphasized_decelerate,
     delay = 0,
+    heightMultiplier = 1,
   }: {
     duration?: number
     easing?: (t: number) => number
-    delay?: number
+    delay?: number,
+    heightMultiplier?: number,
   } = {}
 ) {
   return {
     duration,
     easing,
     delay,
-    css: (t: number) => `height: ${t * node.offsetHeight}px; opacity: ${t}; transform: translateY(${(1 - t) * -node.offsetHeight}px)`,
+    css: (t: number) => `height: ${t * node.offsetHeight}px; opacity: ${t}; transform: translateY(${(1 - t) * -node.offsetHeight * heightMultiplier}px)`,
   }
 }
 

@@ -16,7 +16,7 @@
     <slot name="trigger"/>
   </button>
   {#if open}
-    <div use:clickOutside={{handler: () => open = false, exclude: `#${id}`}} in:expandHeightAutoFade out:expandHeightAutoFade class="absolute mt-2 z-50">
+    <div use:clickOutside={{handler: () => open = false, exclude: `#${id}`}} in:expandHeightAutoFade={{heightMultiplier: 0.1}} out:expandHeightAutoFade={{heightMultiplier: 0.1}} class="absolute mt-2 z-50">
       <slot name="content" {setOpen}/>
     </div>
   {/if}
